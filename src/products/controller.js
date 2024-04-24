@@ -58,10 +58,37 @@ const updateProductById = (req, res) => {
   });
 };
 
+const createUser = async (req, res) => {
+  try {
+    const values = [req.body.username, req.body.password];
+    const { rows } = await pool.query(queries.createUser, values);
+    return res.status(201).json({ createUser: rows[0] });
+  } catch (error) {
+    console.log("Error : ", error.message);
+    return res.status(400).json({ message: error, message });
+  }
+};
+
+const authUser = async (req, res) => {
+  try {
+    const values = [req.body.username, req.body.password];
+    const { rows } = await pool.query(queries.authUser, values);
+    if (!rows.length) {
+      return res.status(400).json({ message: "denied" }); // invalid credentials
+    }
+    return res.status(200).json({ message: "ok" }); // authentication successfull
+  } catch (error) {
+    console.log("Error : ", error.message);
+    return res.status(400).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getProducts,
   getProductById,
   addProduct,
   deleteProductById,
   updateProductById,
+  createUser,
+  authUser,
 };

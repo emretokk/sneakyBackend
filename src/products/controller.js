@@ -32,12 +32,27 @@ const addProduct = (req, res) => {
 const deleteProductById = (req, res) => {
   const id = parseInt(req.params.id);
   pool.query(queries.getProductById, [id], (error, results) => {
+    if (error) {
+      // Hata durumunda istenilen mesajı döndür ve fonksiyonu burada sonlandır
+      return res
+        .status(500)
+        .send("An error occurred while retrieving product information");
+    }
+
     const noProductFound = !results.rows.length;
     if (noProductFound) {
-      res.send("Product does not exist in the database");
+      return res.status(404).send("Product does not exist in the database");
     }
+
+    // Ürün bulunduysa, silme işlemini gerçekleştir
     pool.query(queries.deleteProductById, [id], (error, results) => {
-      if (error) throw error;
+      if (error) {
+        // Hata durumunda istenilen mesajı döndür
+        return res
+          .status(500)
+          .send("An error occurred while deleting the product");
+      }
+      // Başarılı yanıt
       res.status(200).send("Product deleted successfully");
     });
   });

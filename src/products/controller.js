@@ -1,5 +1,6 @@
 const pool = require("../../db.js");
 const queries = require("./queries.js");
+const fs = require("fs");
 
 const getProducts = (req, res) => {
   pool.query(queries.getProducts, (error, results) => {
@@ -94,6 +95,24 @@ const authUser = async (req, res) => {
     return res.status(200).json({ message: "ok" }); // authentication successfull
   } catch (error) {
     console.log("Error : ", error.message);
+    return res.status(400).json({ message: error.message });
+  }
+};
+
+const uploadImg = async (req, res) => {
+  try {
+    const imgData = fs.readFileSync(
+      "C:/dev/projects/sneakyBackend/src/images/test.jpg"
+    );
+    pool.query(queries.uploadImg, [imgData], (err, res) => {
+      if (err) {
+        console.error("Error inserting image", err);
+      } else {
+        console.log("image inserting successful");
+      }
+    });
+  } catch (error) {
+    console.log("Error: ", error.message);
     return res.status(400).json({ message: error.message });
   }
 };

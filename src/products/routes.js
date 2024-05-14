@@ -1,10 +1,15 @@
 const { Router } = require("express");
 const controller = require("./controller");
+const multer = require("multer");
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 const router = Router();
 
+// Get products
 router.get("/", controller.getProducts);
-router.post("/", controller.addProduct);
+// Add product
+router.post("/", upload.single("productImg"), controller.addProduct);
 
 router.get("/:id", controller.getProductById);
 router.delete("/:id", controller.deleteProductById);

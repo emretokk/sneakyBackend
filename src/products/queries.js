@@ -1,7 +1,7 @@
-const getProducts = "SELECT * FROM products";
+const getProducts = "SELECT * FROM products ORDER BY id ASC";
 const getProductById = "SELECT * FROM products WHERE id = $1";
 const addProduct =
-  "INSERT INTO products (title, category, price, oldprice, brand, model) VALUES ($1, $2, $3, $4, $5, $6)";
+  "INSERT INTO products (title, category, price, oldprice, brand, model, image) VALUES ($1, $2, $3, $4, $5, $6, $7)";
 const deleteProductById = "DELETE FROM products WHERE id = $1";
 const updateProductById = "UPDATE products SET title = $1 WHERE id = $2";
 const createUser =

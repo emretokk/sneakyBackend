@@ -8,6 +8,26 @@ const getProducts = (req, res) => {
   });
 };
 
+const getProductsDesc = (req, res) => {
+  pool.query(queries.getProductsDesc, (error, results) => {
+    if (error) throw error;
+    res.status(200).json(results.rows);
+  });
+};
+
+const getProductsByPrice = (req, res) => {
+  pool.query(queries.getProductsByPrice, (error, results) => {
+    if (error) throw error;
+    res.status(200).json(results.rows);
+  });
+};
+const getProductsByPriceDesc = (req, res) => {
+  pool.query(queries.getProductsByPriceDesc, (error, results) => {
+    if (error) throw error;
+    res.status(200).json(results.rows);
+  });
+};
+
 const getProductById = (req, res) => {
   const id = parseInt(req.params.id);
   pool.query(queries.getProductById, [id], (error, results) => {
@@ -104,6 +124,9 @@ const authUser = async (req, res) => {
 
 module.exports = {
   getProducts,
+  getProductsDesc,
+  getProductsByPrice,
+  getProductsByPriceDesc,
   getProductById,
   addProduct,
   deleteProductById,

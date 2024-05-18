@@ -6,8 +6,14 @@ const upload = multer({ storage: storage });
 
 const router = Router();
 
-// Get products
+// Get products with ascending order
 router.get("/", controller.getProducts);
+// Get products by id with descending order
+router.get("/descbyid", controller.getProductsDesc);
+// Get products by price with ascending order
+router.get("/ascbyprice", controller.getProductsByPrice);
+// Get products by price with descending order
+router.get("/descbyprice", controller.getProductsByPriceDesc);
 // Add product
 router.post("/", upload.single("productImg"), controller.addProduct);
 

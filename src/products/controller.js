@@ -28,9 +28,9 @@ const getProductsByPriceDesc = (req, res) => {
   });
 };
 
-const getProductById = (req, res) => {
-  const id = parseInt(req.params.id);
-  pool.query(queries.getProductById, [id], (error, results) => {
+const getProductsByBrand = (req, res) => {
+  const brand = req.params.brand;
+  pool.query(queries.getProductsByBrand, [brand], (error, results) => {
     if (error) throw error;
     res.status(200).json(results.rows);
   });
@@ -51,6 +51,14 @@ const addProduct = (req, res) => {
       console.log("Product added successfully");
     }
   );
+};
+
+const getProductById = (req, res) => {
+  const id = parseInt(req.params.id);
+  pool.query(queries.getProductById, [id], (error, results) => {
+    if (error) throw error;
+    res.status(200).json(results.rows);
+  });
 };
 
 const deleteProductById = (req, res) => {
@@ -128,6 +136,7 @@ module.exports = {
   getProductsByPrice,
   getProductsByPriceDesc,
   getProductById,
+  getProductsByBrand,
   addProduct,
   deleteProductById,
   updateProductById,

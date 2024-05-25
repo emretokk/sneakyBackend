@@ -16,6 +16,15 @@ router.get("/ascbyprice", controller.getProductsByPrice);
 router.get("/descbyprice", controller.getProductsByPriceDesc);
 // Get products by brand with ascending order
 router.get("/ascbybrand/:brand", controller.getProductsByBrand);
+// Get products by brand with ascending order
+router.get("/descbybrand/:brand", controller.getProductsByBrandDesc);
+// Get products by brand with ascending order
+router.get("/ascbybrandbyprice/:brand", controller.getProductsByBrandWithPrice);
+// Get products by brand with ascending order
+router.get(
+  "/descbybrandbyprice/:brand",
+  controller.getProductsByBrandWithPriceDesc
+);
 
 // Add product
 router.post("/", upload.single("productImg"), controller.addProduct);

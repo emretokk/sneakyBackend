@@ -14,7 +14,14 @@ const createUser =
   "INSERT INTO users (username, password) VALUES ($1, crypt($2, gen_salt('bf'))) RETURNING *";
 const authUser =
   "SELECT * FROM users WHERE username = $1 AND password = crypt($2, password)";
-const getProductsByBrand = "SELECT * FROM products WHERE brand = $1";
+const getProductsByBrand =
+  "select * from products where brand = $1 order by id asc";
+const getProductsByBrandDesc =
+  "select * from products where brand = $1 order by id desc";
+const getProductsByBrandWithPrice =
+  "select * from products where brand = $1 order by price asc";
+const getProductsByBrandWithPriceDesc =
+  "select * from products where brand = $1 order by price desc";
 
 module.exports = {
   getProducts,
@@ -23,6 +30,9 @@ module.exports = {
   getProductsByPriceDesc,
   getProductById,
   getProductsByBrand,
+  getProductsByBrandDesc,
+  getProductsByBrandWithPrice,
+  getProductsByBrandWithPriceDesc,
   addProduct,
   deleteProductById,
   updateProductById,

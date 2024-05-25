@@ -35,6 +35,31 @@ const getProductsByBrand = (req, res) => {
     res.status(200).json(results.rows);
   });
 };
+const getProductsByBrandDesc = (req, res) => {
+  const brand = req.params.brand;
+  pool.query(queries.getProductsByBrandDesc, [brand], (error, results) => {
+    if (error) throw error;
+    res.status(200).json(results.rows);
+  });
+};
+const getProductsByBrandWithPrice = (req, res) => {
+  const brand = req.params.brand;
+  pool.query(queries.getProductsByBrandWithPrice, [brand], (error, results) => {
+    if (error) throw error;
+    res.status(200).json(results.rows);
+  });
+};
+const getProductsByBrandWithPriceDesc = (req, res) => {
+  const brand = req.params.brand;
+  pool.query(
+    queries.getProductsByBrandWithPriceDesc,
+    [brand],
+    (error, results) => {
+      if (error) throw error;
+      res.status(200).json(results.rows);
+    }
+  );
+};
 
 const addProduct = (req, res) => {
   let { title, category, price, oldprice, brand, model } = req.body;
@@ -137,6 +162,9 @@ module.exports = {
   getProductsByPriceDesc,
   getProductById,
   getProductsByBrand,
+  getProductsByBrandDesc,
+  getProductsByBrandWithPrice,
+  getProductsByBrandWithPriceDesc,
   addProduct,
   deleteProductById,
   updateProductById,

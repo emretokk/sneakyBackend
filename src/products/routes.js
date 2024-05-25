@@ -6,24 +6,29 @@ const upload = multer({ storage: storage });
 
 const router = Router();
 
-// Get products with ascending order
+// Get all products
 router.get("/", controller.getProducts);
-// Get products by id with descending order
 router.get("/descbyid", controller.getProductsDesc);
-// Get products by price with ascending order
 router.get("/ascbyprice", controller.getProductsByPrice);
-// Get products by price with descending order
 router.get("/descbyprice", controller.getProductsByPriceDesc);
-// Get products by brand with ascending order
+// Get products by brand
 router.get("/ascbybrand/:brand", controller.getProductsByBrand);
-// Get products by brand with ascending order
 router.get("/descbybrand/:brand", controller.getProductsByBrandDesc);
-// Get products by brand with ascending order
 router.get("/ascbybrandbyprice/:brand", controller.getProductsByBrandWithPrice);
-// Get products by brand with ascending order
 router.get(
   "/descbybrandbyprice/:brand",
   controller.getProductsByBrandWithPriceDesc
+);
+// Get products by category
+router.get("/ascbycategory/:category", controller.getProductsByCategory);
+router.get("/descbycategory/:category", controller.getProductsByCategoryDesc);
+router.get(
+  "/ascbycategorybyprice/:category",
+  controller.getProductsByCategoryWithPrice
+);
+router.get(
+  "/descbycategorybyprice/:category",
+  controller.getProductsByCategoryWithPriceDesc
 );
 
 // Add product

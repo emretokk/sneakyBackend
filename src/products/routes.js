@@ -30,6 +30,8 @@ router.get(
   "/descbycategorybyprice/:category",
   controller.getProductsByCategoryWithPriceDesc
 );
+// Get products by search
+router.get("/searchproduct/:title", controller.getProductsBySearch);
 
 // Add product
 router.post("/", upload.single("productImg"), controller.addProduct);

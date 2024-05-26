@@ -105,9 +105,18 @@ const getProductsByCategoryWithPriceDesc = (req, res) => {
   );
 };
 
+const getProductsBySearch = (req, res) => {
+  const title = req.params.title;
+  pool.query(queries.getProductsBySearch, [title], (error, results) => {
+    if (error) throw error;
+    res.status(200).json(results.rows);
+  });
+};
+
 const addProduct = (req, res) => {
   let { title, category, price, oldprice, brand, model } = req.body;
-  if (oldprice == "") {
+  console.log(req.body);
+  if (oldprice == "undefined") {
     oldprice = null;
   }
   const image = req.file.buffer;
@@ -213,6 +222,7 @@ module.exports = {
   getProductsByCategoryDesc,
   getProductsByCategoryWithPrice,
   getProductsByCategoryWithPriceDesc,
+  getProductsBySearch,
   addProduct,
   deleteProductById,
   updateProductById,

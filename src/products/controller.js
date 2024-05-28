@@ -139,6 +139,20 @@ const getProductById = (req, res) => {
   });
 };
 
+const getbrands = (req, res) => {
+  pool.query(queries.getbrands, (error, results) => {
+    if (error) throw error;
+    res.status(200).json(results.rows);
+  });
+};
+
+const getcategories = (req, res) => {
+  pool.query(queries.getcategories, (error, results) => {
+    if (error) throw error;
+    res.status(200).json(results.rows);
+  });
+};
+
 const deleteProductById = (req, res) => {
   const id = parseInt(req.params.id);
   pool.query(queries.getProductById, [id], (error, results) => {
@@ -223,6 +237,8 @@ module.exports = {
   getProductsByCategoryWithPrice,
   getProductsByCategoryWithPriceDesc,
   getProductsBySearch,
+  getbrands,
+  getcategories,
   addProduct,
   deleteProductById,
   updateProductById,

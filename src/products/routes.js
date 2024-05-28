@@ -33,6 +33,11 @@ router.get(
 // Get products by search
 router.get("/searchproduct/:title", controller.getProductsBySearch);
 
+// Get brands
+router.get("/getbrands", controller.getbrands);
+// Get categories
+router.get("/getcategories", controller.getcategories);
+
 // Add product
 router.post("/", upload.single("productImg"), controller.addProduct);
 

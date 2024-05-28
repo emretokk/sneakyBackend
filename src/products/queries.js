@@ -36,6 +36,8 @@ const getProductsByCategoryWithPrice =
 const getProductsByCategoryWithPriceDesc =
   "select * from products where category = $1 order by price desc";
 const getProductsBySearch = "select * from products where title ~* $1";
+const getbrands = "select * from brands";
+const getcategories = "select * from categories";
 
 module.exports = {
   getProducts,
@@ -52,6 +54,8 @@ module.exports = {
   getProductsByCategoryWithPrice,
   getProductsByCategoryWithPriceDesc,
   getProductsBySearch,
+  getbrands,
+  getcategories,
   addProduct,
   deleteProductById,
   updateProductById,

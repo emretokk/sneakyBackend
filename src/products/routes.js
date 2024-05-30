@@ -37,6 +37,12 @@ router.get("/searchproduct/:title", controller.getProductsBySearch);
 router.get("/getbrands", controller.getbrands);
 // Get categories
 router.get("/getcategories", controller.getcategories);
+// Get category by id
+router.get("/getcategory/:id", controller.getCategoryById);
+// Del category
+router.delete("/delcategory/:id", controller.delcategory);
+// Add category
+router.post("/addcategory/:categoryname", controller.addcategory);
 
 // Add product
 router.post("/", upload.single("productImg"), controller.addProduct);

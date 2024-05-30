@@ -39,6 +39,9 @@ const getProductsBySearch = "select * from products where title ~* $1";
 
 // brands tablosu
 const getbrands = "select * from brands";
+const getBrandById = "select * from brands where id = $1";
+const delbrand = "DELETE FROM brands WHERE id = $1";
+const addbrand = "insert into brands (brandname) values ($1);";
 
 // categories tablosu
 const getcategories = "select * from categories";
@@ -66,6 +69,9 @@ module.exports = {
   getCategoryById,
   delcategory,
   addcategory,
+  getBrandById,
+  delbrand,
+  addbrand,
   addProduct,
   deleteProductById,
   updateProductById,

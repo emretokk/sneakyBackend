@@ -198,6 +198,51 @@ const delcategory = (req, res) => {
   });
 };
 
+const addbrand = (req, res) => {
+  const brandname = req.params.brandname;
+  pool.query(queries.addbrand, [brandname], (error, results) => {
+    if (error) throw error;
+    res.status(200).json(results.rows);
+  });
+};
+
+const getBrandById = (req, res) => {
+  const id = parseInt(req.params.id);
+  pool.query(queries.getBrandById, [id], (error, results) => {
+    if (error) throw error;
+    res.status(200).json(results.rows);
+  });
+};
+
+const delbrand = (req, res) => {
+  const id = parseInt(req.params.id);
+  pool.query(queries.getBrandById, [id], (error, results) => {
+    if (error) {
+      // Hata durumunda istenilen mesajı döndür ve fonksiyonu burada sonlandır
+      return res
+        .status(500)
+        .send("An error occurred while retrieving product information");
+    }
+
+    const noProductFound = !results.rows.length;
+    if (noProductFound) {
+      return res.status(404).send("Product does not exist in the database");
+    }
+
+    // Ürün bulunduysa, silme işlemini gerçekleştir
+    pool.query(queries.delbrand, [id], (error, results) => {
+      if (error) {
+        // Hata durumunda istenilen mesajı döndür
+        return res
+          .status(500)
+          .send("An error occurred while deleting the product");
+      }
+      // Başarılı yanıt
+      res.status(200).send("Product deleted successfully");
+    });
+  });
+};
+
 const deleteProductById = (req, res) => {
   const id = parseInt(req.params.id);
   pool.query(queries.getProductById, [id], (error, results) => {
@@ -287,6 +332,9 @@ module.exports = {
   getCategoryById,
   delcategory,
   addcategory,
+  getBrandById,
+  delbrand,
+  addbrand,
   addProduct,
   deleteProductById,
   updateProductById,

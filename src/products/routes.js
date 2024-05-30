@@ -35,6 +35,13 @@ router.get("/searchproduct/:title", controller.getProductsBySearch);
 
 // Get brands
 router.get("/getbrands", controller.getbrands);
+// Get brand by id
+router.get("/getbrand/:id", controller.getBrandById);
+// Del brand
+router.delete("/delbrand/:id", controller.delbrand);
+// Add brand
+router.post("/addbrand/:brandname", controller.addbrand);
+
 // Get categories
 router.get("/getcategories", controller.getcategories);
 // Get category by id

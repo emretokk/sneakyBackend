@@ -51,6 +51,13 @@ router.delete("/delcategory/:id", controller.delcategory);
 // Add category
 router.post("/addcategory/:categoryname", controller.addcategory);
 
+// Get stocks
+router.get("/getstocks", controller.getstocks);
+// Get stock by id
+router.get("/getstocks/:id", controller.getstocksbyid);
+// Add stock
+router.post("/addstock", upload.single(), controller.addstock);
+
 // Add product
 router.post("/", upload.single("productImg"), controller.addProduct);
 

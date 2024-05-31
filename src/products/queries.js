@@ -49,7 +49,44 @@ const getCategoryById = "select * from categories where id = $1";
 const delcategory = "DELETE FROM categories WHERE id = $1";
 const addcategory = "insert into categories (categoryname) values ($1);";
 
+// stocks tablosu
+const getstocks = "select * from stocks";
+const getstocksbyid = "select * from stocks where id = $1";
+const getstockno40byid = "select no40 from stocks where id = $1";
+const getstockno41byid = "select no41 from stocks where id = $1";
+const getstockno42byid = "select no42 from stocks where id = $1";
+const getstockno43byid = "select no43 from stocks where id = $1";
+const getstockno44byid = "select no44 from stocks where id = $1";
+const getstockno45byid = "select no45 from stocks where id = $1";
+
+const addstockno40 =
+  "INSERT INTO stocks (id, no40) VALUES ($1, $2) ON CONFLICT (id) DO UPDATE SET no40 = $2;";
+const addstockno41 =
+  "INSERT INTO stocks (id, no41) VALUES ($1, $2) ON CONFLICT (id) DO UPDATE SET no41 = $2;";
+const addstockno42 =
+  "INSERT INTO stocks (id, no42) VALUES ($1, $2) ON CONFLICT (id) DO UPDATE SET no42 = $2;";
+const addstockno43 =
+  "INSERT INTO stocks (id, no43) VALUES ($1, $2) ON CONFLICT (id) DO UPDATE SET no43 = $2;";
+const addstockno44 =
+  "INSERT INTO stocks (id, no44) VALUES ($1, $2) ON CONFLICT (id) DO UPDATE SET no44 = $2;";
+const addstockno45 =
+  "INSERT INTO stocks (id, no45) VALUES ($1, $2) ON CONFLICT (id) DO UPDATE SET no45 = $2;";
+
 module.exports = {
+  getstocks,
+  getstocksbyid,
+  getstockno40byid,
+  getstockno41byid,
+  getstockno42byid,
+  getstockno43byid,
+  getstockno44byid,
+  getstockno45byid,
+  addstockno40,
+  addstockno41,
+  addstockno42,
+  addstockno43,
+  addstockno44,
+  addstockno45,
   getProducts,
   getProductsDesc,
   getProductsByPrice,

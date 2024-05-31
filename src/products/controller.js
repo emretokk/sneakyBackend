@@ -312,7 +312,141 @@ const authUser = async (req, res) => {
   }
 };
 
+const getstocks = (req, res) => {
+  pool.query(queries.getstocks, (error, results) => {
+    if (error) throw error;
+    res.status(200).json(results.rows);
+  });
+};
+
+const getstocksbyid = (req, res) => {
+  const id = parseInt(req.params.id);
+  pool.query(queries.getstocksbyid, [id], (error, results) => {
+    if (error) throw error;
+    res.status(200).json(results.rows);
+  });
+};
+
+const addstock = (req, res) => {
+  let { no, id, count } = req.body;
+  id = parseInt(id);
+  count = parseInt(count);
+
+  let curCount = 0;
+
+  let queryno = "no" + no;
+  switch (queryno) {
+    case "no40":
+      pool.query(queries.getstockno40byid, [id], (error, results) => {
+        if (results.rows.length) {
+          // update curcount if exist a stock
+          curCount = results.rows[0].no40;
+        }
+        pool.query(
+          queries.addstockno40,
+          [id, count + curCount],
+          (error, results) => {
+            if (error) throw error;
+            // Başarılı yanıt
+            res.status(200).send("stock added successfully");
+          }
+        );
+      });
+      break;
+    case "no41":
+      pool.query(queries.getstockno41byid, [id], (error, results) => {
+        if (results.rows.length) {
+          // update curcount if exist a stock
+          curCount = results.rows[0].no41;
+        }
+        pool.query(
+          queries.addstockno41,
+          [id, count + curCount],
+          (error, results) => {
+            if (error) throw error;
+            // Başarılı yanıt
+            res.status(200).send("stock added successfully");
+          }
+        );
+      });
+      break;
+    case "no42":
+      pool.query(queries.getstockno42byid, [id], (error, results) => {
+        if (results.rows.length) {
+          // update curcount if exist a stock
+          curCount = results.rows[0].no42;
+        }
+        pool.query(
+          queries.addstockno42,
+          [id, count + curCount],
+          (error, results) => {
+            if (error) throw error;
+            // Başarılı yanıt
+            res.status(200).send("stock added successfully");
+          }
+        );
+      });
+      break;
+    case "no43":
+      pool.query(queries.getstockno43byid, [id], (error, results) => {
+        if (results.rows.length) {
+          // update curcount if exist a stock
+          curCount = results.rows[0].no43;
+        }
+        pool.query(
+          queries.addstockno43,
+          [id, count + curCount],
+          (error, results) => {
+            if (error) throw error;
+            // Başarılı yanıt
+            res.status(200).send("stock added successfully");
+          }
+        );
+      });
+      break;
+    case "no44":
+      pool.query(queries.getstockno44byid, [id], (error, results) => {
+        if (results.rows.length) {
+          // update curcount if exist a stock
+          curCount = results.rows[0].no44;
+        }
+        pool.query(
+          queries.addstockno44,
+          [id, count + curCount],
+          (error, results) => {
+            if (error) throw error;
+            // Başarılı yanıt
+            res.status(200).send("stock added successfully");
+          }
+        );
+      });
+      break;
+    case "no45":
+      pool.query(queries.getstockno45byid, [id], (error, results) => {
+        if (results.rows.length) {
+          // update curcount if exist a stock
+          curCount = results.rows[0].no45;
+        }
+        pool.query(
+          queries.addstockno45,
+          [id, count + curCount],
+          (error, results) => {
+            if (error) throw error;
+            // Başarılı yanıt
+            res.status(200).send("stock added successfully");
+          }
+        );
+      });
+      break;
+    default:
+      break;
+  }
+};
+
 module.exports = {
+  getstocks,
+  getstocksbyid,
+  addstock,
   getProducts,
   getProductsDesc,
   getProductsByPrice,

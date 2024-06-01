@@ -50,7 +50,7 @@ const delcategory = "DELETE FROM categories WHERE id = $1";
 const addcategory = "insert into categories (categoryname) values ($1);";
 
 // stocks tablosu
-const getstocks = "select * from stocks";
+const getstocks = "select * from stocks order by id asc";
 const getstocksbyid = "select * from stocks where id = $1";
 const getstockno40byid = "select no40 from stocks where id = $1";
 const getstockno41byid = "select no41 from stocks where id = $1";

@@ -57,6 +57,8 @@ router.get("/getstocks", controller.getstocks);
 router.get("/getstocks/:id", controller.getstocksbyid);
 // Add stock
 router.post("/addstock", upload.single(), controller.addstock);
+// Remove stock
+router.post("/removestock", upload.single(), controller.removestock);
 
 // Add product
 router.post("/", upload.single("productImg"), controller.addProduct);

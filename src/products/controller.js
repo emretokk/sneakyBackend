@@ -327,17 +327,166 @@ const getstocksbyid = (req, res) => {
   });
 };
 
+const removestock = (req, res) => {
+  let { no, id, count } = req.body;
+  id = parseInt(id);
+  count = parseInt(count);
+
+  let curCount = 0;
+  let queryno = "no" + no;
+
+  switch (queryno) {
+    case "no40":
+      pool.query(queries.getstockno40byid, [id], (error, results) => {
+        if (error) {
+          console.log(error);
+          return res.status(400).json({ message: error, message });
+        }
+        if (results.rows.length) {
+          // update curcount if exist a stock
+          curCount = results.rows[0].no40;
+        }
+        let val = curCount - count;
+        if (!(val >= 0)) {
+          val = 0;
+        }
+        pool.query(queries.addstockno40, [id, val], (error, results) => {
+          if (error) console.log("ürün bulunamadı");
+          // Başarılı yanıt
+          res.status(200).send("stock removed successfully");
+        });
+      });
+      break;
+
+    case "no41":
+      pool.query(queries.getstockno41byid, [id], (error, results) => {
+        if (error) {
+          console.log(error);
+          return res.status(400).json({ message: error, message });
+        }
+        if (results.rows.length) {
+          // update curcount if exist a stock
+          curCount = results.rows[0].no41;
+        }
+        let val = curCount - count;
+        if (!(val >= 0)) {
+          val = 0;
+        }
+        pool.query(queries.addstockno41, [id, val], (error, results) => {
+          if (error) console.log("ürün bulunamadı");
+          // Başarılı yanıt
+          res.status(200).send("stock removed successfully");
+        });
+      });
+      break;
+
+    case "no42":
+      pool.query(queries.getstockno42byid, [id], (error, results) => {
+        if (error) {
+          console.log(error);
+          return res.status(400).json({ message: error, message });
+        }
+        if (results.rows.length) {
+          // update curcount if exist a stock
+          curCount = results.rows[0].no42;
+        }
+        let val = curCount - count;
+        if (!(val >= 0)) {
+          val = 0;
+        }
+        pool.query(queries.addstockno42, [id, val], (error, results) => {
+          if (error) console.log("ürün bulunamadı");
+          // Başarılı yanıt
+          res.status(200).send("stock removed successfully");
+        });
+      });
+      break;
+
+    case "no43":
+      pool.query(queries.getstockno43byid, [id], (error, results) => {
+        if (error) {
+          console.log(error);
+          return res.status(400).json({ message: error, message });
+        }
+        if (results.rows.length) {
+          // update curcount if exist a stock
+          curCount = results.rows[0].no43;
+        }
+        let val = curCount - count;
+        if (!(val >= 0)) {
+          val = 0;
+        }
+        pool.query(queries.addstockno43, [id, val], (error, results) => {
+          if (error) console.log("ürün bulunamadı");
+          // Başarılı yanıt
+          res.status(200).send("stock removed successfully");
+        });
+      });
+      break;
+
+    case "no44":
+      pool.query(queries.getstockno44byid, [id], (error, results) => {
+        if (error) {
+          console.log(error);
+          return res.status(400).json({ message: error, message });
+        }
+        if (results.rows.length) {
+          // update curcount if exist a stock
+          curCount = results.rows[0].no44;
+        }
+        let val = curCount - count;
+        if (!(val >= 0)) {
+          val = 0;
+        }
+        pool.query(queries.addstockno44, [id, val], (error, results) => {
+          if (error) console.log("ürün bulunamadı");
+          // Başarılı yanıt
+          res.status(200).send("stock removed successfully");
+        });
+      });
+      break;
+
+    case "no45":
+      pool.query(queries.getstockno45byid, [id], (error, results) => {
+        if (error) {
+          console.log(error);
+          return res.status(400).json({ message: error, message });
+        }
+        if (results.rows.length) {
+          // update curcount if exist a stock
+          curCount = results.rows[0].no45;
+        }
+        let val = curCount - count;
+        if (!(val >= 0)) {
+          val = 0;
+        }
+        pool.query(queries.addstockno45, [id, val], (error, results) => {
+          if (error) console.log("ürün bulunamadı");
+          // Başarılı yanıt
+          res.status(200).send("stock removed successfully");
+        });
+      });
+      break;
+
+    default:
+      break;
+  }
+};
+
 const addstock = (req, res) => {
   let { no, id, count } = req.body;
   id = parseInt(id);
   count = parseInt(count);
 
   let curCount = 0;
-
   let queryno = "no" + no;
   switch (queryno) {
     case "no40":
       pool.query(queries.getstockno40byid, [id], (error, results) => {
+        if (error) {
+          console.log(error);
+          return res.status(400).json({ message: error, message });
+        }
         if (results.rows.length) {
           // update curcount if exist a stock
           curCount = results.rows[0].no40;
@@ -346,7 +495,7 @@ const addstock = (req, res) => {
           queries.addstockno40,
           [id, count + curCount],
           (error, results) => {
-            if (error) throw error;
+            if (error) console.log("ürün bulunamadı");
             // Başarılı yanıt
             res.status(200).send("stock added successfully");
           }
@@ -447,6 +596,7 @@ module.exports = {
   getstocks,
   getstocksbyid,
   addstock,
+  removestock,
   getProducts,
   getProductsDesc,
   getProductsByPrice,

@@ -72,6 +72,9 @@ const addstockno44 =
 const addstockno45 =
   "INSERT INTO stocks (id, no45) VALUES ($1, $2) ON CONFLICT (id) DO UPDATE SET no45 = $2;";
 
+const updateProduct =
+  "UPDATE products SET title = $1, category = $2, price = $3, oldprice = $4, brand = $5, model = $6 WHERE id = $7";
+
 module.exports = {
   getstocks,
   getstocksbyid,
@@ -110,6 +113,7 @@ module.exports = {
   delbrand,
   addbrand,
   addProduct,
+  updateProduct,
   deleteProductById,
   updateProductById,
   createUser,

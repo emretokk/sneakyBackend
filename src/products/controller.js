@@ -113,6 +113,29 @@ const getProductsBySearch = (req, res) => {
   });
 };
 
+const updateProductById = (req, res) => {
+  const id = parseInt(req.params.id);
+  let { title, category, price, oldprice, brand, model } = req.body;
+  if (oldprice == "undefined") {
+    oldprice = null;
+  }
+  pool.query(
+    queries.updateProduct,
+    [title, category, price, oldprice, brand, model, id],
+    (error, results) => {
+      if (error) {
+        console.error(error);
+        return res
+          .status(500)
+          .send("An error occurred while updating the product");
+      }
+
+      res.status(201).send("Product updated successfully");
+      console.log("Product updated successfully");
+    }
+  );
+};
+
 const addProduct = (req, res) => {
   let { title, category, price, oldprice, brand, model } = req.body;
   console.log(req.body);
@@ -268,21 +291,6 @@ const deleteProductById = (req, res) => {
       }
       // Başarılı yanıt
       res.status(200).send("Product deleted successfully");
-    });
-  });
-};
-
-const updateProductById = (req, res) => {
-  const id = parseInt(req.params.id);
-  const { title } = req.body;
-  pool.query(queries.getProductById, [id], (error, results) => {
-    const noProductFound = !results.rows.length;
-    if (noProductFound) {
-      res.send("Product does not exist in the database");
-    }
-    pool.query(queries.updateProductById, [title, id], (error, results) => {
-      if (error) throw error;
-      res.status(200).send("Product updated successfully");
     });
   });
 };

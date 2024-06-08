@@ -62,6 +62,8 @@ router.post("/removestock", upload.single(), controller.removestock);
 
 // Add product
 router.post("/", upload.single("productImg"), controller.addProduct);
+// Edit Product
+router.put("/:id", upload.single(), controller.updateProductById);
 
 router.get("/:id", controller.getProductById);
 router.delete("/:id", controller.deleteProductById);
